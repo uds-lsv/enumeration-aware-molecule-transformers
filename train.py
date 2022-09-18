@@ -135,10 +135,20 @@ class ModelArguments:
         default=False, metadata={"help": "Whether to use MTR auxiliary objective."}
     )
     mlm_weight: float = field(
-        default=0.1,
+        default=0.33,
         metadata={
             "help": "Weight for MLM auxiliary objective (only effective if --do_mlm)."
         },
+    )
+    mtr_weight: float = field(
+        default=0.33,
+        metadata={
+            "help": "Weight for MTR auxiliary objective (only effective if --do_mtr)."
+        },
+    )
+    cl_weight: float = field(
+        default=0.33,
+        metadata={"help": "Weight for CL auxiliary objective."},
     )
     mlp_only_train: bool = field(
         default=False, metadata={"help": "Use MLP only during training"}

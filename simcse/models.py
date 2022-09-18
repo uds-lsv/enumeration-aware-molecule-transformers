@@ -168,9 +168,39 @@ def cl_forward(
     num_sent = input_ids.size(1)
 
     # get input ids for canonical smiles
+    mtr_loss = None
     if mtr_input_ids is not None:
         mtr_input_ids = mtr_input_ids.view(batch_size, num_sent, -1)[:, 0, :]
+        mtr_attention_mask = attention_mask.view(batch_size, num_sent, -1)[:, 0, :]
+        mtr_token_type_ids = token_type_ids.view(batch_size, num_sent, -1)[:, 0, :]
+
         mtr_labels = mtr_labels[:, 0, :]
+        outputs = encoder(
+            mtr_input_ids,
+            attention_mask=mtr_attention_mask,
+            token_type_ids=mtr_token_type_ids,
+            position_ids=position_ids,
+            head_mask=head_mask,
+            inputs_embeds=inputs_embeds,
+            output_attentions=output_attentions,
+            output_hidden_states=True
+            if cls.model_args.pooler_type in ["avg_top2", "avg_first_last"]
+            else False,
+            return_dict=True,
+        )
+
+        sequence_output = (
+            outputs.last_hidden_state
+        )  # shape = (batch, seq_len, hidden_size)
+        logits = cls.mtr_head(sequence_output)
+
+        if mtr_labels is None:
+            return cls.unnormalize_logits(logits)
+
+        if mtr_labels is not None:
+            normalized_labels = cls.normalize_logits(mtr_labels)
+            loss_mtr = nn.MSELoss()
+            mtr_loss = loss_mtr(logits.view(-1), normalized_labels.view(-1))
 
     mlm_outputs = None
     # Flatten input for encoding
@@ -290,7 +320,11 @@ def cl_forward(
         masked_lm_loss = loss_fct(
             prediction_scores.view(-1, cls.config.vocab_size), mlm_labels.view(-1)
         )
-        loss = loss + cls.model_args.mlm_weight * masked_lm_loss
+        loss = (cls.model_args.cl_weight * loss) + (
+            cls.model_args.mlm_weight * masked_lm_loss
+        )
+    if mtr_loss is not None:
+        loss = loss + (cls.model_args.mtr_weight * mtr_loss)
 
     if not return_dict:
         output = (cos_sim,) + outputs[2:]
