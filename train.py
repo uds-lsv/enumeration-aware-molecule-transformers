@@ -551,6 +551,8 @@ def main():
                 "token_type_ids",
                 "mlm_input_ids",
                 "mlm_labels",
+                "mtr_input_ids",
+                "mtr_labels",
             ]
             bs = len(features)
             if bs > 0:
@@ -579,6 +581,9 @@ def main():
                     batch["input_ids"]
                 )
 
+            if model_args.do_mtr:
+                ## get canonical smile as input for MTR
+                batch["mtr_input_ids"] = batch["input_ids"]
             batch = {
                 k: batch[k].view(bs, num_sent, -1)
                 if k in special_keys

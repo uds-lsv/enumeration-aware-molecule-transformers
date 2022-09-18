@@ -17,4 +17,5 @@ python train.py \
     --do_train \
     --do_eval \
     --do_mtr \
+    --do_mlm \
     "$@"

@@ -35,7 +35,6 @@ class BertRegressionHead(nn.Module):
         super(BertRegressionHead, self).__init__()
         self.dense = nn.Linear(config.hidden_size, config.hidden_size)
         self.dropout = nn.Dropout(config.hidden_dropout_prob)
-        print(f"nums labels: **********>>> {config.num_mtr_labels}")
         self.out_proj = nn.Linear(config.hidden_size, config.num_mtr_labels)
 
     def forward(self, features, **kwargs):
@@ -158,6 +157,8 @@ def cl_forward(
     return_dict=None,
     mlm_input_ids=None,
     mlm_labels=None,
+    mtr_input_ids=None,
+    mtr_labels=None,
 ):
     return_dict = return_dict if return_dict is not None else cls.config.use_return_dict
     ori_input_ids = input_ids
@@ -165,6 +166,10 @@ def cl_forward(
     # Number of sentences in one instance
     # 2: pair instance; 3: pair instance with a hard negative
     num_sent = input_ids.size(1)
+
+    # get input ids for canonical smiles
+    if mlm_input_ids is not None:
+        mtr_input_ids = mtr_input_ids.view(batch_size, num_sent, -1)[:, 0, :]
 
     mlm_outputs = None
     # Flatten input for encoding
@@ -382,6 +387,8 @@ class BertForCL(BertPreTrainedModel):
         sent_emb=False,
         mlm_input_ids=None,
         mlm_labels=None,
+        mtr_input_ids=None,
+        mtr_labels=None,
     ):
         if sent_emb:
             return sentemb_forward(
@@ -414,6 +421,8 @@ class BertForCL(BertPreTrainedModel):
                 return_dict=return_dict,
                 mlm_input_ids=mlm_input_ids,
                 mlm_labels=mlm_labels,
+                mtr_input_ids=mtr_input_ids,
+                mtr_labels=mtr_labels,
             )
 
     def normalize_logits(self, tensor):
