@@ -133,6 +133,7 @@ dmypy.json
 data
 result
 .venv-cu11
-mlruns/*
+mlruns
 *.csv
 data/*
+runs
