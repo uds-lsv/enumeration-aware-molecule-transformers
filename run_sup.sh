@@ -1,6 +1,6 @@
 python train.py \
-    --model_name_or_path prajjwal1/bert-tiny \
-    --train_file data/nli_for_simcse.csv \
+    --model_name_or_path shahrukhx01/smole-bert \
+    --train_file data/dummy_contrastive_smiles.csv \
     --output_dir result/my-sup-simcse-bert-mini \
     --num_train_epochs 1 \
     --per_device_train_batch_size 8 \

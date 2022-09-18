@@ -170,6 +170,7 @@ def cl_forward(
     # get input ids for canonical smiles
     if mtr_input_ids is not None:
         mtr_input_ids = mtr_input_ids.view(batch_size, num_sent, -1)[:, 0, :]
+        mtr_labels = mtr_labels[:, 0, :]
 
     mlm_outputs = None
     # Flatten input for encoding

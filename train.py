@@ -8,6 +8,9 @@ import torch
 import json
 import collections
 import random
+import numpy as np
+from rdkit import Chem
+from rdkit.ML.Descriptors.MoleculeDescriptors import MolecularDescriptorCalculator
 
 from datasets import load_dataset
 
@@ -468,6 +471,23 @@ def main():
     else:
         raise NotImplementedError
 
+    descriptors = [name for name, _ in Chem.Descriptors.descList]
+    descriptors.remove("Ipc")
+    calculator = MolecularDescriptorCalculator(descriptors)
+
+    def _compute_descriptors(smiles):
+        mol = Chem.MolFromSmiles(smiles)
+        if mol is None:
+            mol_descriptors = np.full(shape=(model_args.num_mtr_labels), fill_value=0.0)
+        else:
+            mol_descriptors = np.array(list(calculator.CalcDescriptors(mol)))
+            mol_descriptors = np.nan_to_num(
+                mol_descriptors, nan=0.0, posinf=0.0, neginf=0.0
+            )
+        assert mol_descriptors.size == model_args.num_mtr_labels
+
+        return mol_descriptors
+
     def prepare_features(examples):
         # padding = longest (default)
         #   If no sentence in the batch exceed the max length, then use
@@ -479,7 +499,12 @@ def main():
         total = len(examples[sent0_cname])
 
         # Avoid "None" fields
+        mol_descriptors = []
         for idx in range(total):
+            if model_args.do_mtr:
+                smiles = examples[sent0_cname][idx]
+                mol_descriptors.append(_compute_descriptors(smiles))
+
             if examples[sent0_cname][idx] is None:
                 examples[sent0_cname][idx] = " "
             if examples[sent1_cname][idx] is None:
@@ -502,6 +527,8 @@ def main():
         )
 
         features = {}
+        if model_args.do_mtr:
+            sent_features["mtr_labels"] = mol_descriptors * 3
         if sent2_cname is not None:
             for key in sent_features:
                 features[key] = [
@@ -518,7 +545,6 @@ def main():
                     [sent_features[key][i], sent_features[key][i + total]]
                     for i in range(total)
                 ]
-
         return features
 
     if training_args.do_train:
