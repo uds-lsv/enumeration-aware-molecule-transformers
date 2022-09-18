@@ -1,24 +1,6 @@
 ## SimCSE: Simple Contrastive Learning of Sentence Embeddings
 
 This repository contains the code and pre-trained models for our paper [SimCSE: Simple Contrastive Learning of Sentence Embeddings](https://arxiv.org/abs/2104.08821).
-
-**************************** **Updates** ****************************
-
-<!-- Thanks for your interest in our repo! -->
-
-<!-- Probably you will think this as another *"empty"* repo of a preprint paper 🥱.
-Wait a minute! The authors are working day and night 💪, to make the code and models available, so you can explore our state-of-the-art sentence embeddings.
-We anticipate the code will be out * **in one week** *. -->
-
-<!-- * 4/26: SimCSE is now on [Gradio Web Demo](https://gradio.app/g/AK391/SimCSE) (Thanks [@AK391](https://github.com/AK391)!). Try it out! -->
-* 8/31: Our paper has been accepted to EMNLP! Please check out our [updated paper](https://arxiv.org/pdf/2104.08821.pdf) (with updated numbers and baselines). 
-* 5/12: We updated our [unsupervised models](#model-list) with new hyperparameters and better performance.
-* 5/10: We released our [sentence embedding tool](#getting-started) and [demo code](./demo).
-* 4/23: We released our [training code](#training).
-* 4/20: We released our [model checkpoints](#use-our-models-out-of-the-box) and [evaluation code](#evaluation).
-* 4/18: We released [our paper](https://arxiv.org/pdf/2104.08821.pdf). Check it out!
-
-
 ## Quick Links
 
   - [Overview](#overview)
