@@ -168,7 +168,7 @@ def cl_forward(
     num_sent = input_ids.size(1)
 
     # get input ids for canonical smiles
-    if mlm_input_ids is not None:
+    if mtr_input_ids is not None:
         mtr_input_ids = mtr_input_ids.view(batch_size, num_sent, -1)[:, 0, :]
 
     mlm_outputs = None
