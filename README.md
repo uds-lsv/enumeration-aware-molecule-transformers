@@ -1,11 +1,11 @@
 ## Domain Adaptation for Enumeration-aware Molecular Transformers 
 
-Install depedencies
+### Install depedencies
 `bash
 pip install -r requirements.txt
 `
 
-Run training<br/>
+### Run training
 ```bash
     python train.py \
     --model_name_or_path shahrukhx01/smole-bert \
