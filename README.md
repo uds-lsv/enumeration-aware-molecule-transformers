@@ -10,5 +10,5 @@ ems when using the code, or want to report a bug, you can open an issue. Please 
 
 ## References
 Code base adapted from:
-1. [SimCSE](https://github.com/princeton-nlp/SimCSE)
-2.[Chemberta-2](https://github.com/seyonechithrananda/bert-loves-chemistry)
+* [SimCSE](https://github.com/princeton-nlp/SimCSE)
+* [Chemberta-2](https://github.com/seyonechithrananda/bert-loves-chemistry)
