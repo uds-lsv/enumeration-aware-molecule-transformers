@@ -6,7 +6,7 @@ pip install -r requirements.txt
 `
 
 Run training<br/>
-`bash
+```bash
     python train.py \
     --model_name_or_path shahrukhx01/smole-bert \
     --train_file data/augmented_hips_2x_simcse.csv \
@@ -32,7 +32,7 @@ Run training<br/>
     --mlm_weight 0.33\
     --mtr_weight 0.33 \
     "$@"
-`
+```
 
 
 ems when using the code, or want to report a bug, you can open an issue. Please try to specify the problem with details so we can help you better and quicker!
