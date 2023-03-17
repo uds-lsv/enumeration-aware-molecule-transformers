@@ -9,9 +9,9 @@ pip install -r requirements.txt
 ```bash
     python train.py \
     --model_name_or_path shahrukhx01/smole-bert \
-    --train_file data/augmented_hips_2x_simcse.csv \
-    --output_dir result/mlm-mtr-simcse-hips \
-    --normalization_path data/hips_normalization_values_207.json \
+    --train_file data/smiles.csv \
+    --output_dir result/domain-adapted-transformer \
+    --normalization_path data/normalization_values_207.json \
     --num_train_epochs 10 \
     --per_device_train_batch_size 32 \
     --learning_rate 3e-5 \
