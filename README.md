@@ -35,8 +35,6 @@ pip install -r requirements.txt
 ```
 
 
-ems when using the code, or want to report a bug, you can open an issue. Please try to specify the problem with details so we can help you better and quicker!
-
 ## References
 Code base adapted from:
 * [SimCSE](https://github.com/princeton-nlp/SimCSE)
