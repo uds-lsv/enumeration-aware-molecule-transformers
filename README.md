@@ -4,7 +4,7 @@
 `bash
 pip install -r requirements.txt
 `
-## Prepare Data for Pre-training using [this notebook](https://github.com/MoleculeTransformers/enumeration-aware-molecule-transformers/blob/main/notebooks/Enumeration-aware%20Pre-training%20Data%20Preparation.ipynb)
+#### Prepare Data for Pre-training using [this notebook](https://github.com/MoleculeTransformers/enumeration-aware-molecule-transformers/blob/main/notebooks/Enumeration-aware%20Pre-training%20Data%20Preparation.ipynb)
 
 ### Run training
 ```bash
