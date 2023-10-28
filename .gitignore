@@ -130,10 +130,10 @@ dmypy.json
 .pyre/
 .DS_Store
 .vscode
-data
 result
 .venv-cu11
 mlruns
 *.csv
-data/*
 runs
+*.smiles
+smole-bert
