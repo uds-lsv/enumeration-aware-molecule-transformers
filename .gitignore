@@ -137,3 +137,6 @@ mlruns
 runs
 *.smiles
 smole-bert
+smole-bert-mtr
+*.jsonl
+*.json
