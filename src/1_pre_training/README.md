@@ -19,7 +19,7 @@ python mlm_pre_train_bert.py
 ```
 ## MTR Pre-training
 - Make sure you have adjusted tokenizer name and trained it using the instructions above.
-- In addition to downloading and training the tokenizer, for MTR you also need to preprare physicochemical properties as labels and compute normalization values (mean and std) on the extracted properties. You can achieve this by executing the script `src/1_pre_training/data/prepare_mtr_dataset.py`
+- In addition to downloading the dataset and training the tokenizer, for MTR you also need to preprare physicochemical properties as labels and compute normalization values (mean and std) on the extracted properties. You can achieve this by executing the script `src/1_pre_training/data/prepare_mtr_dataset.py`
 ```bash
 python prepare_mtr_dataset.py
 ```
