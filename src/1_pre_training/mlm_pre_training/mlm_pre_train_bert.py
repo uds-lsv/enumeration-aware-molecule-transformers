@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import torch
 from transformers import DataCollatorForLanguageModeling  # noqa
 from transformers import Trainer  # noqa
 from transformers import BertConfig, BertForMaskedLM, BertTokenizer, LineByLineTextDataset, TrainingArguments  # noqa
@@ -23,6 +24,7 @@ def get_init_model():
         type_vocab_size=5,
         hidden_dropout_prob=0.1,
         attention_probs_dropout_prob=0.1,
+        is_gpu=torch.cuda.is_available(),
     )
     return BertForMaskedLM(config)
 
@@ -56,6 +58,7 @@ training_args = TrainingArguments(
     per_device_train_batch_size=64,
     save_steps=10_000,
     save_total_limit=2,
+    fp16=torch.cuda.is_available(),  # fp16 only works on CUDA devices
 )
 
 # create PyTorch Lightning trainer

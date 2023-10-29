@@ -3,8 +3,12 @@ from pathlib import Path
 
 from tokenizers import BertWordPieceTokenizer
 
-# Model and tokenizer paths
-MODEL_NAME = "smole-bert"
+"""Adjust model name based on the pre-training task
+
+- "smole-bert" in case of MLM pre-training
+- "smole-bert-mtr" in case of MTR pre-training
+"""
+MODEL_NAME = "smole-bert-mtr"
 TOKENIZER_PATH = str(Path(__file__).parent.resolve() / MODEL_NAME)
 VOCAB_SIZE = 4096
 DATASET_PATH = str(Path(__file__).parent.resolve() / "data" / "guacamol_v1_train.smiles")
