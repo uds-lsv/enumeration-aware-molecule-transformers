@@ -6,7 +6,7 @@ from loguru import logger
 from typing_extensions import Annotated
 
 
-def perform_augmentation(dataset_name: Annotated[str, typer.Argument()]):
+def create_domain_adaptation_dataset_sbert(dataset_name: Annotated[str, typer.Argument()]):
     smiles_column = "smiles"
     data_reader = DataReader(dataset_name, smiles_column=smiles_column)
     smiles_enumerator = SmilesEnumerator(canonical=False, enum=True)
@@ -33,4 +33,4 @@ def perform_augmentation(dataset_name: Annotated[str, typer.Argument()]):
 
 
 if __name__ == "__main__":
-    typer.run(perform_augmentation)
+    typer.run(create_domain_adaptation_dataset_sbert)

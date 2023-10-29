@@ -7,6 +7,7 @@ from __future__ import division, print_function, unicode_literals
 import threading
 
 import numpy as np
+import pandas as pd
 from rdkit import Chem
 from tqdm import tqdm
 
@@ -265,3 +266,36 @@ class SmilesEnumerator(object):
                 transformed[idx] = np.random.choice(smiles)
                 is_enumerated[idx] = 0
         return transformed, list(smiles), is_enumerated
+
+    def enumerate_smiles_hard_neg(
+        self, data_reader, smiles_col, replication_count=2, random_pairs=False, rand_proba=0.0
+    ):
+        """
+        Performs enumeration augmentation on the canonical molecular SMILES
+
+        Args:
+            dataset (_type_): dataframe containing molecular SMILSS
+            smiles_col (_type_): column corresponding to molecular SMILES
+            replication_count (int, optional): Number of enumerations for each CHEMICAL SMILE. Defaults to 2.
+        """
+        smiles = np.repeat(getattr(data_reader.dataset, smiles_col), replication_count)
+        self.fit(smiles, extra_chars=["\\"])
+        v = self.transform(smiles)
+        transformed = self.reverse_transform(v)
+        hard_negatives = [-1] * len(smiles)
+
+        if random_pairs:
+            assert len(smiles) == len(transformed), "The length of augmented SMILES must equal original SMILES"
+            for idx, smile in enumerate(tqdm(smiles)):
+                hard_neg = np.random.choice(smiles)
+                while hard_neg == smile:
+                    hard_neg = np.random.choice(smiles)
+                hard_negatives[idx] = hard_neg
+
+        return pd.DataFrame(
+            {
+                "sent1": smiles,
+                "sent0": transformed,
+                "hard_neg": hard_negatives,
+            }
+        )
