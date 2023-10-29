@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import torch
-from transformers import BertConfig, TrainingArguments
+from transformers import BertConfig, BertTokenizer, TrainingArguments
 from utils import DatasetArguments, create_trainer
 
 # change the following configuration vars to your own path, if necessary
@@ -51,5 +51,8 @@ if __name__ == "__main__":
     trainer.train()
 
     # save model post training
-    trainer.save_model(MODEL_AND_TOKENIZER_PATH)
-    trainer.model.save_pretrained(MODEL_AND_TOKENIZER_PATH)
+    trainer.model.bert.save_pretrained(MODEL_AND_TOKENIZER_PATH)
+    _tokenizer: BertTokenizer = BertTokenizer.from_pretrained(
+        dataset_args.tokenizer_path,
+    )
+    _tokenizer.save_pretrained(MODEL_AND_TOKENIZER_PATH)

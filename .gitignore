@@ -140,3 +140,5 @@ smole-bert
 smole-bert-mtr
 *.jsonl
 *.json
+model/
+models/

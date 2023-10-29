@@ -67,7 +67,7 @@ class BertForSequenceClassification(BertPreTrainedModel):
         super().__init__(config)
         self.num_labels = config.num_labels
 
-        self.roberta = BertModel(config, add_pooling_layer=False)
+        self.bert = BertModel(config, add_pooling_layer=False)
         self.classifier = BertClassificationHead(config)
 
         self.init_weights()
@@ -93,7 +93,7 @@ class BertForSequenceClassification(BertPreTrainedModel):
         """
         return_dict = return_dict if return_dict is not None else self.config.use_return_dict
 
-        outputs = self.roberta(
+        outputs = self.bert(
             input_ids,
             attention_mask=attention_mask,
             token_type_ids=token_type_ids,
@@ -146,7 +146,7 @@ class BertForRegression(BertPreTrainedModel):
             torch.tensor([label_std if label_std != 0 else 1 for label_std in config.norm_std]),
         )
 
-        self.roberta = BertModel(config, add_pooling_layer=False)
+        self.bert = BertModel(config, add_pooling_layer=False)
         self.regression = BertRegressionHead(config)
 
         self.init_weights()
@@ -172,7 +172,7 @@ class BertForRegression(BertPreTrainedModel):
         """
         return_dict = return_dict if return_dict is not None else self.config.use_return_dict
 
-        outputs = self.roberta(
+        outputs = self.bert(
             input_ids,
             attention_mask=attention_mask,
             token_type_ids=token_type_ids,
