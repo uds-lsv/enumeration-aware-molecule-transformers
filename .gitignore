@@ -142,3 +142,6 @@ smole-bert-mtr
 *.json
 model/
 models/
+!train.csv
+!test.csv
+!valid.csv
