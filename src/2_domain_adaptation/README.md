@@ -58,7 +58,7 @@ python prepare_data_cbert.py bace
 # for MUV
 python prepare_data_cbert.py muv
 ```
-2. For performing the domain adaptation step you can the following command, for instance on the BBBP dataset. Please make sure to update the option params corresponding to dataset and model name or path before running the following step.
+2. For performing the domain adaptation step you can the following command, for instance on the BBBP dataset. Please make sure to update the option params corresponding to dataset and model name or path before running the following step. Run the script `src/2_domain_adaptation/cbert/train.py` as follows:
 ```bash
 python train.py \
 --model_name_or_path shahrukhx01/smole-bert \
