@@ -23,9 +23,9 @@ class DataReader:
         dataset = dataset_name.lower().strip()
         match dataset:
             case "bace":
-                train_dataset = load_bace_classification(reload=True)[1][0]
-                valid_dataset = load_bace_classification(reload=True)[1][1]
-                test_dataset = load_bace_classification(reload=True)[1][2]
+                train_dataset = load_bace_classification(reload=False)[1][0]
+                valid_dataset = load_bace_classification(reload=False)[1][1]
+                test_dataset = load_bace_classification(reload=False)[1][2]
                 self.train_dataset = Dataset(smiles=train_dataset.ids, y=train_dataset.y)
                 self.valid_dataset = Dataset(smiles=valid_dataset.ids, y=valid_dataset.y)
                 self.test_dataset = Dataset(smiles=test_dataset.ids, y=test_dataset.y)
@@ -51,9 +51,9 @@ class DataReader:
                 self.valid_dataset = Dataset(smiles=valid_dataset.ids, y=valid_dataset.y)
                 self.test_dataset = Dataset(smiles=test_dataset.ids, y=test_dataset.y)
             case "tox21":
-                train_dataset = load_tox21()[1][0]
-                valid_dataset = load_tox21()[1][1]
-                test_dataset = load_tox21()[1][2]
+                train_dataset = load_tox21(reload=False)[1][0]
+                valid_dataset = load_tox21(reload=False)[1][1]
+                test_dataset = load_tox21(reload=False)[1][2]
                 self.train_dataset = Dataset(smiles=train_dataset.ids, y=train_dataset.y)
                 self.valid_dataset = Dataset(smiles=valid_dataset.ids, y=valid_dataset.y)
                 self.test_dataset = Dataset(smiles=test_dataset.ids, y=test_dataset.y)
