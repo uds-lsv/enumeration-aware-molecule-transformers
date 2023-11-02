@@ -1,10 +1,6 @@
 # Enumeration-aware Molecular Transformers for Representation Learning
 
 ## Overview
-Molecule Transformers is a collection of recipes for pre-training and fine-tuning molecular transformer language models, including BART, BERT, etc. **Full thesis available [here](https://moleculetransformers.github.io/thesis_cs_msc_Khan_Shahrukh.pdf)**. This project contains the following modules:
-
-</details>
-<h1> Introduction</h1>
 We introduce a suite of neural language model tools for pre-training, fine-tuning SMILES-based molecular language models. Furthermore, we also provide recipes for semi-supervised recipes for fine-tuning these languages in low-data settings using Semi-supervised learning. Lastly, we also have open-sourced mechanisms for data augmentations and generating embeddings from pre-trained molecular language models as independent packages described below.
 
 ### [1. Enumeration-aware Molecular Transformers](https://github.com/MoleculeTransformers/enumeration-aware-molecule-transformers)
