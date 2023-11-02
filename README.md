@@ -3,7 +3,7 @@
 ## Overview
 We introduce a suite of neural language model tools for pre-training, fine-tuning SMILES-based molecular language models. Furthermore, we also provide recipes for semi-supervised recipes for fine-tuning these languages in low-data settings using Semi-supervised learning. Lastly, we also have open-sourced mechanisms for data augmentations and generating embeddings from pre-trained molecular language models as independent packages described below.
 
-### [1. Enumeration-aware Molecular Transformers](https://github.com/MoleculeTransformers/enumeration-aware-molecule-transformers)
+### 1. Enumeration-aware Molecular Transformers
 Introduces contrastive learning alongside multi-task regression, and masked language modelling as pre-training objectives to inject enumeration knowledge into pre-trained language models.
 #### a. Molecular Domain Adaptation (Contrastive Encoder-based)
 ##### i. Architecture
