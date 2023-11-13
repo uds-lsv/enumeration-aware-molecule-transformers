@@ -22,7 +22,7 @@ You can reproduce the experiment by:
 pip install -r requirements.txt
 `
 ### 1.Pre-training the molecular transfomers
-The detailed steps are for pre-training with both MLM and MTR objectives are outlined in [here](./src/1_pre_training/README.md).
+The detailed steps are for pre-training with **Encoder-based architectures pertaining MLM, MTR and Seq2Seq BART with denoising** objectives are outlined in [here](./src/1_pre_training/README.md).
 
 ### 2. Domain Adaptation with Contrastive Learning and Multitask Learning
 To reproduce the domain adaptation step from our work please follow the guidelines [here](./src/2_domain_adaptation/README.md).

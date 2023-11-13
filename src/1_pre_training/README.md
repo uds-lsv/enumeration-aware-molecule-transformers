@@ -29,3 +29,22 @@ python mtr_pre_train_bert.py
 ```
 ## Final Pre-trained Model
 At the end training you can located the pre-trained model for MLM and MTR pre-training in `src/1_pre_training/smole-bert` and/or `src/1_pre_training/smole-bert-mtr` respectively for the given pre-training objective.
+
+## BART Pre-training
+- You can ignore the above steps for pre-training BART
+- 2. Download the Guacamol dataset tailored for Seq2Seq BART using the script found in `src/1_pre_training/data/download_bart_dataset.py` using:
+```bash
+python download_bart_dataset.py
+```
+- Then, start pre-training the BART model with denoising objective with masking and permutation using the script in `src/1_pre_training/bart_pre_training/denoise_pre_train_bart.py` using:
+```bash
+python denoise_pre_train_bart.py --model_name_or_path='shahrukhx01/smole-bart' \
+--dataset_name='guacamol_data' --per_device_train_batch_size=16 \
+--output_dir=smole-bart-mask-permute --num_train_epochs=10 --masking_noise=1
+```
+- Pre-training the BART model with denoising objective without masking using the script in `src/1_pre_training/bart_pre_training/denoise_pre_train_bart.py` using:
+```bash
+python denoise_pre_train_bart.py --model_name_or_path='shahrukhx01/smole-bart' \
+--dataset_name='guacamol_data' --per_device_train_batch_size=16 \
+--output_dir=smole-bart-permute-only --num_train_epochs=10 --masking_noise=0
+```
