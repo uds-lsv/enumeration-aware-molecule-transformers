@@ -32,7 +32,7 @@ At the end training you can located the pre-trained model for MLM and MTR pre-tr
 
 ## BART Pre-training
 - You can ignore the above steps for pre-training BART
-- 2. Download the Guacamol dataset tailored for Seq2Seq BART using the script found in `src/1_pre_training/data/download_bart_dataset.py` using:
+- Download the Guacamol dataset tailored for Seq2Seq BART using the script found in `src/1_pre_training/data/download_bart_dataset.py` using:
 ```bash
 python download_bart_dataset.py
 ```
